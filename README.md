@@ -1,6 +1,6 @@
-# 📌 Part 1. 페이지 & 파일 기반 라우팅
+# Next.js
 
-- [Next.js 라우팅](#파일-기반의-라우팅)
+- [파일 기반의 라우팅](#파일-기반의-라우팅)
 - [Link 컴포넌트로 내비게이팅 하기](#link-컴포넌트로-내비게이팅-하기)
 - [동적 라우팅에서 path parameter 추출하기](#동적-라우팅에서-path-parameter-추출하기)
 - [Catch all routes](#catch-all-routes)
@@ -8,9 +8,7 @@
 
 ---
 
-## Part 1. 페이지 & 파일 기반 라우팅
-
-> ### 파일 기반의 라우팅
+> ## 파일 기반의 라우팅
 
 기존 React의 라우팅 방식은 `react-router-dom` 모듈을 통해 구현할 수 있다.
 
@@ -45,7 +43,7 @@ pages/products/index.js -> '/products'
 pages/products/[id].js -> '/products/:id'
 ```
 
-> ### Link 컴포넌트로 내비게이팅 하기
+> ## Link 컴포넌트로 내비게이팅 하기
 
 기존 React에서는 페이지 이동 시 `react-router-dom` 모듈의 `Link` 컴포넌트를 사용해야 라우팅이 가능했다.
 
@@ -82,7 +80,7 @@ const App = () => {
 };
 ```
 
-> ### 동적 라우팅에서 path parameter 추출하기
+> ## 동적 라우팅에서 path parameter 추출하기
 
 `router object`의 query 속성을 이용하면 path parameter를 손쉽게 추출할 수 있다.
 
@@ -105,7 +103,7 @@ export default PortfolioProjectPage;
 
 <img src="https://user-images.githubusercontent.com/72539723/198908379-c5782909-eb94-4497-8fdc-f6c3aea7538c.png" width="414" alt="router 객체">
 
-> ### Catch all routes
+> ## Catch all routes
 
 대괄호[] 안에 세 개의 점을 추가하여 동적 경로를 확장하여 모든 경로를 포착할 수 있다.
 
@@ -131,7 +129,7 @@ export default BlogPostsPage;
 
 <img  src="https://user-images.githubusercontent.com/72539723/198910442-cb332ddc-906f-4929-ad18-245eafdeff8f.png" width="414" alt="catch all routes">
 
-> ### 커스텀 404 페이지 추가하기
+> ## 커스텀 404 페이지 추가하기
 
 Next.js는 의도하지 않은 경로를 접근했을 때 기본적으로 404 페이지를 제공해준다.
 
