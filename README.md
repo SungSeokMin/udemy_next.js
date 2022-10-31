@@ -1,8 +1,9 @@
 # 목차
 
-📌 [Next.js 라우팅](파일-기반의-라우팅)  
-📌 [동적 라우팅에서 path parameter 추출하기](동적-라우팅에서-path-parameter-추출하기)  
-📌 [Catch all routes](Catch-all-routes)
+📌 [Next.js 라우팅](#파일-기반의-라우팅)  
+📌 [Link 컴포넌트로 내비게이팅 하기](#link-컴포넌트로-내비게이팅-하기)  
+📌 [동적 라우팅에서 path parameter 추출하기](#동적-라우팅에서-path-parameter-추출하기)  
+📌 [Catch all routes](#catch-all-routes)
 
 ---
 
@@ -39,6 +40,43 @@ pages/index.js -> '/'
 pages/products/index.js -> '/products'
 
 pages/products/[id].js -> '/products/:id'
+```
+
+> ## Link 컴포넌트로 내비게이팅 하기
+
+기존 React에서는 페이지 이동 시 `react-router-dom` 모듈의 `Link` 컴포넌트를 사용해야 라우팅이 가능했다.
+
+```js
+import { Link } from 'react-router-dom';
+
+const App = () => {
+  return <Link to="products">Products 페이지로 이동</Link>;
+};
+```
+
+하지만 Next.js는 기본적으로 제공해주는 `next/link`의 `Link` 컴포넌트로 처리할 수 있다.  
+다만, `href` 속성을 이용해야 한다.
+
+```js
+import Link from 'next/link';
+
+const App = () => {
+  return <Link href="products">Products 페이지로 이동</Link>;
+};
+```
+
+또한, `useRouter` hooks를 이용하는 방법도 있다.
+
+```js
+import { useRouter } from 'next/router';
+
+const App = () => {
+  const router = useRouter();
+
+  const onMove = () => router.push('/products');
+
+  return <button onClick={onMove}>moving products page</button>;
+};
 ```
 
 > ## 동적 라우팅에서 path parameter 추출하기
