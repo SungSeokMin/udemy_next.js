@@ -3,7 +3,8 @@
 📌 [Next.js 라우팅](#파일-기반의-라우팅)  
 📌 [Link 컴포넌트로 내비게이팅 하기](#link-컴포넌트로-내비게이팅-하기)  
 📌 [동적 라우팅에서 path parameter 추출하기](#동적-라우팅에서-path-parameter-추출하기)  
-📌 [Catch all routes](#catch-all-routes)
+📌 [Catch all routes](#catch-all-routes)  
+📌 [커스텀 404 페이지 추가하기](#커스텀-404-페이지-추가하기)
 
 ---
 
@@ -127,3 +128,24 @@ export default BlogPostsPage;
 ```
 
 <img  src="https://user-images.githubusercontent.com/72539723/198910442-cb332ddc-906f-4929-ad18-245eafdeff8f.png" width="414" alt="catch all routes">
+
+> ## 커스텀 404 페이지 추가하기
+
+Next.js는 의도하지 않은 경로를 접근했을 때 기본적으로 404 페이지를 제공해준다.
+
+<img  src="https://user-images.githubusercontent.com/72539723/198915966-fd6118d4-48e0-431f-a9dc-4571054bed4f.png" width="414" alt="404">
+
+하지만 아래와 같이 두 가지 방법으로 pages 폴더 하위에 404 페이지를 만들어서 쉽게 제어할 수 있다.
+
+- pages/404.js
+- pages/404/index.js
+
+```js
+import React from 'react';
+
+const NotFoundPage = () => {
+  return <div>Page Not Found !!</div>;
+};
+```
+
+<img  src="https://user-images.githubusercontent.com/72539723/198916354-0a3675ca-1226-41a9-b28f-ad8d083b4ddd.png" width="412" alt="custom 404">
