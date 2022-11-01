@@ -5,6 +5,7 @@
 - [동적 라우팅에서 path parameter 추출하기](#동적-라우팅에서-path-parameter-추출하기)
 - [Catch all routes](#catch-all-routes)
 - [커스텀 404 페이지 추가하기](#커스텀-404-페이지-추가하기)
+- [Pre-Rendering](#pre-rendering)
 
 ---
 
@@ -151,3 +152,21 @@ const NotFoundPage = () => {
 <img  src="https://user-images.githubusercontent.com/72539723/198916354-0a3675ca-1226-41a9-b28f-ad8d083b4ddd.png" width="412" alt="custom 404">
 
 ---
+
+> ## Pre-Rendering
+
+React는 `CSR(Client Side Rendering)` 방식을 사용한다.
+
+- `빈 내용의 index.html 파일을 다운 받고 index.html 내부의 자바스크립트 번들 파일을 다운로드 후 최종 컨텐츠를 렌더링` 하는 방식이다.
+
+이에 반해 Next.js는 `SSR(Server Side Rendering` 방식을 사용한다.
+
+- `클라이언트에서 요청이 들어올 때마다 서버로부터 완전히 만들어진 html 파일을 받아와 페이지를 렌더링` 하는 방식이다.
+
+Next.js에서 가장 중요한 개념인 `Pre-Rendering`은 모든 페이지가 사용자에게 전해지기 전에 html을 미리 생성하는 것이다.
+
+`Pre-Rendering`은 `초기 로드(initial load)`와 `수화(hydration)` 단계로 구성된다.
+
+<img  src="https://nextjs.org/static/images/learn/data-fetching/pre-rendering.png" width="412" alt="custom 404">
+
+[이미지 출처](https://nextjs.org/learn/basics/data-fetching/pre-rendering)
