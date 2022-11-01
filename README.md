@@ -8,6 +8,7 @@
 - [Pre-Rendering](#pre-rendering)
 - [초기 로드(initial load) 및 수화(hydration)](#초기-로드initial-load-및-수화hydration)
 - [getStaticProps() - 정적 페이지 생성](#getstaticprops---정적-페이지-생성)
+- [증분 정적 생성, ISR(Incremental Static Regeneration)](#증분-정적-생성-isrincremental-static-regeneration))
 
 ---
 
@@ -201,3 +202,24 @@ export const getStaticProps = async (context) => {
   };
 };
 ```
+
+> ## 증분 정적 생성, ISR(Incremental Static Regeneration)
+
+`getStaticProps()`로 Next.js가 빌드될 때 정적 페이지를 생성하지만, 자주 바뀌는 데이터에 대해서 사용자에게 바로 보여줄 수 있어야 한다. 이런 경우 `증분 정적 생성`, 즉 `ISR` 방법을 이용할 수 있다.
+
+결론적으로 페이지를 사전 생성을 하긴 하지만 `최대 X초마다 들어오는 모든 요청에 대해 주어진 페이지를 재생성` 하도록 하는 방법이다.
+
+```js
+// 10초마다 페이지를 재성성
+
+export const getStaticProps = async (context) => {
+  return {
+    props: {
+      // data
+    },
+    revalidate: 10, // 10초
+  };
+};
+```
+
+❗️다만, 개발 환경에서는 `revalidate` 값과 상관없이 새로고침 시 매번 페이지를 재생성한다.
