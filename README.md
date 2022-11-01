@@ -199,6 +199,11 @@ export const getStaticProps = async (context) => {
     props: {
       // data
     },
+    revalidate: 10, // X초마다 들어오는 모든 요청에 대해 주어진 페이지를 재생성
+    notFound: boolean // true: 일반 페이지 대신 404 오류 페이지 출력, false : 일반 페이지 출력
+    redirect: {
+      destination: string // path 기입, 다른 페이지로 리디렉션
+    }
   };
 };
 ```
