@@ -19,7 +19,9 @@ const EventItem = ({ title, image, date, location, id }) => {
 
   return (
     <li className={classes.item}>
-      <img src={`/${image}`} alt={title} />
+      <div className={classes.image}>
+        <img src={`/${image}`} alt={title} />
+      </div>
 
       <div className={classes.content}>
         <div className={classes.summary}>
