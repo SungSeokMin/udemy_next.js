@@ -6,6 +6,7 @@
 - [Catch all routes](#catch-all-routes)
 - [커스텀 404 페이지 추가하기](#커스텀-404-페이지-추가하기)
 - [Pre-Rendering](#pre-rendering)
+- [초기 로드(initial load) 및 수화(hydration)](#초기-로드initial-load-및-수화hydration)
 
 ---
 
@@ -170,3 +171,14 @@ Next.js에서 가장 중요한 개념인 `Pre-Rendering`은 모든 페이지가 
 <img  src="https://nextjs.org/static/images/learn/data-fetching/pre-rendering.png" width="412" alt="custom 404">
 
 [이미지 출처](https://nextjs.org/learn/basics/data-fetching/pre-rendering)
+
+> ## 초기 로드(initial load) 및 수화(hydration)
+
+### 📌 초기 로드(initial load)
+
+html을 먼저 화면에 보여주며, 아직 자바스크립트 파일이 로드가 되지 않았으므로 `사용자와의 상호작용`은 일어나지 않는 단계이다.
+
+### 📌 수화(hydration)
+
+서버에서 초기 로드 단계를 수행하고 클라이언트로 전송해준 후, 바로 `자바스크립트를 로드 시킨 후 클라이언트로 전송`해준다. 즉, `전송 받은 자바스크립트와 html을 이어주는 단계`이다.  
+`수화(hydration)` 단계에서 초기 로드를 거친 컴포넌트는 초기화되며, `사용자와의 상호작용`이 가능해진다.
