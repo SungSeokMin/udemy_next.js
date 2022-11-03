@@ -9,6 +9,7 @@
 - [초기 로드(initial load) 및 수화(hydration)](#초기-로드initial-load-및-수화hydration)
 - [getStaticProps() - 정적 페이지 생성](#getstaticprops---정적-페이지-생성)
 - [증분 정적 생성, ISR(Incremental Static Regeneration)](#증분-정적-생성-isrincremental-static-regeneration))
+- [getStaticPaths()](#getstaticpaths)
 
 ---
 
@@ -228,3 +229,29 @@ export const getStaticProps = async (context) => {
 ```
 
 ❗️다만, 개발 환경에서는 `revalidate` 값과 상관없이 새로고침 시 매번 페이지를 재생성한다.
+
+> ## getStaticPaths()
+
+동적 페이지는 하나의 페이지가 아니라 특정한 값에 따라 여러개의 페이지로 나뉠 수 있기 때문에 사전에 생성하지 않는다.
+
+즉, getStaticPaths() 를 이용해서 동적 페이지에 어떤 인스턴스가 사전 생성돼야 하는지를 알려줄 수 있다.
+
+```js
+export const getStaticPaths = async () => {
+  return {
+    paths: [{ params: { key: value } }],
+    fallback: boolean | 'blocking',
+  };
+};
+```
+
+❗️해당 경로가 `pages/[productId].js` 라고 하면 prarms의 key값은 `productId`가 되야한다.
+
+```js
+export const getStaticPaths = async () => {
+  return {
+    paths: [{ params: { productId: 1 } }],
+    fallback: false | true | 'blocking,
+  };
+};
+```
