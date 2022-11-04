@@ -10,6 +10,7 @@
 - [getStaticProps() - 정적 페이지 생성](#getstaticprops---정적-페이지-생성)
 - [증분 정적 생성, ISR(Incremental Static Regeneration)](#증분-정적-생성-isrincremental-static-regeneration))
 - [getStaticPaths()](#getstaticpaths)
+- [getServerSideProps() - 동적 페이지 생성](#getserversideprops---동적-페이지-생성)
 
 ---
 
@@ -255,3 +256,33 @@ export const getStaticPaths = async () => {
   };
 };
 ```
+
+> ## getServerSideProps() - 동적 페이지 생성
+
+빌드되는 시점과 상관없이 해당 페이지에 요청이 들어올 때 마다 서버로부터 데이터를 가져온다.
+
+```js
+export const getServerSideProps = async (context) => {
+  return {
+    props: {},
+    redirect: {
+      destination: string,
+      permanent: boolean,
+    },
+    notFound: boolean,
+  };
+};
+```
+
+`getServerSideProps()`의 매개변수인 context의 구성사항은 아래와 같다.
+
+```
+params -> 동적 페이지의 동적 파라미터 정보
+req -> HTTP request
+res -> HTTP resonse
+query -> query string
+preview
+previewData
+```
+
+---
