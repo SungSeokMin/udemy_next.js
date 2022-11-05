@@ -1,7 +1,9 @@
 import { Fragment } from 'react';
 import { useRouter } from 'next/router';
-
 import { getAllEvents } from '../../helpers/api-util';
+
+import Head from 'next/head';
+
 import EventList from '../../components/events/event-list';
 import EventsSearch from '../../components/events/events-search';
 
@@ -17,6 +19,11 @@ function AllEventsPage(props) {
 
   return (
     <Fragment>
+      <Head>
+        <title>All Events</title>
+        <meta name="description" content="All Events 페이지 입니다." />
+      </Head>
+
       <EventsSearch onSearch={findEventsHandler} />
       <EventList items={events} />
     </Fragment>
@@ -30,7 +37,7 @@ export async function getStaticProps() {
     props: {
       events: events,
     },
-    revalidate: 60
+    revalidate: 60,
   };
 }
 
