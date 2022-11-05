@@ -11,6 +11,10 @@
 - [증분 정적 생성, ISR(Incremental Static Regeneration)](#증분-정적-생성-isrincremental-static-regeneration))
 - [getStaticPaths()](#getstaticpaths)
 - [getServerSideProps() - 동적 페이지 생성](#getserversideprops---동적-페이지-생성)
+- [Next.js 최적화](#nextjs-최적화)
+  - [head](#head)
+  - [Image](#image)
+  - [\_document.js](#_documentjs)
 
 ---
 
@@ -286,3 +290,134 @@ previewData
 ```
 
 ---
+
+> ## Next.js 최적화
+
+Next.js는 최적화를 위해 기본적으로 제공하는 컴포넌트들이 있다.
+
+각각의 페이지에 적용할 수도 있으며, 전역으로 적용할 수도 있다.
+
+### Head
+
+SEO를 최적화 하기 위한 컴포넌트이다.
+
+페이지에 대한 제목과 설명, 또는 meta태그를 통한 SEO 최적화, Open Graph등을 설정할 수 있다.
+
+#### 정적인 값으로 Head 컴포넌트 작성
+
+```js
+import Head from 'next/head';
+
+const HomePage = () => {
+  return (
+    <Fragment>
+      <Head>
+        <title>브라우저 탭에 노출되는 제목입니다.</title>
+        <meta
+          name="description"
+          content="브라우저 검색시 노출되는 해당 페이지에 대한 설명입니다."
+        />
+      </Head>
+    </Fragment>
+  );
+};
+
+export default HomePage;
+```
+
+#### 동적인 값으로 Head 컴포넌트 작성
+
+```js
+import Head from 'next/head';
+
+const HomePage = ({ title, description }) => {
+  return (
+    <Fragment>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+      </Head>
+    </Fragment>
+  );
+};
+
+export const getServerSideProps = async () => {
+  const response = fetch('...');
+
+  return {
+    props: {
+      title: response.title,
+      description: response.description,
+    },
+  };
+};
+
+export default HomePage;
+```
+
+### Image
+
+Next.js에서 제공해주는 Image 컴포넌트는 아래와 같은 기능이 있다.
+
+- 사이즈 최적화
+  - webP와 같은 용량이 작은 포맷으로 이미지를 변환하기도 하며, 디바이스 크기에 맞는 이미지를 다운로드 한다.
+- lazy loading
+  - 화면에 보이는 부분의 이미지는 로딩시키고, 화면 밖에 있는 이미지는 최대한 지연시킨다.
+- placeholder
+  - 이미지가 로드되기 전에 이미지 높이만큼 영역을 표시해준다.
+
+```js
+import Image from 'next/image';
+
+const HomePage = ({ title, description }) => {
+  return (
+    <Fragment>
+      <Image src="..." alt="alt" width={100} height={100} />
+    </Fragment>
+  );
+};
+```
+
+### \_document.js
+
+\_app.js 다음에 실행되며, 공통적으로 적용시킬 <Head>, <body> 태그 안에 들어갈 내용들을 커스텀 할 때 사용한다.
+
+#### 기본 형태
+
+```js
+import { Html, Head, Main, NextScript } from 'next/document';
+
+export default function Document() {
+  return (
+    <Html>
+      <Head />
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+}
+```
+
+#### 커스텀 형태
+
+```js
+import { Html, Head, Main, NextScript } from 'next/document';
+
+export default function Document() {
+  return (
+    <Html>
+      <Head>
+        <title>모든 페이지에 기본적으로 적용되는 제목 입니다.</title>
+      </Head>
+      <body>
+        <div className="modal" />
+
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+}
+```
