@@ -10,7 +10,7 @@ function EventLogistics({ date, address, image, imageAlt }) {
     year: 'numeric',
   });
 
-  const addressText = address.replace(', ', '\n');
+  const addressText = address?.replace(', ', '\n');
 
   return (
     <section className={classes.logistics}>
