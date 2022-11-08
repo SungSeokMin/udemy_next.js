@@ -1,24 +1,47 @@
-import ReactMarkdown from 'react-markdown';
 import PostHeader from './PostHeader';
+import ReactMarkdown from 'react-markdown';
+import Image from 'next/image';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import classes from './PostContent.module.css';
 
-const DUMMY_POST = {
-  slug: 'getting-started-with-nextjs',
-  title: 'Getting Started with NextJS',
-  image: 'getting-started-nextjs.png',
-  date: '2022-11-07',
-  content: '# This is a first post',
-};
+const PostContent = ({ post }) => {
+  const imagePath = `/images/posts/${post.slug}/${post.image}`;
 
-const PostContent = () => {
-  const imagePath = `/images/posts/${DUMMY_POST.slug}/${DUMMY_POST.image}`;
+  const customRenderers = {
+    image: ({ src, alt }) => {
+      return <Image src={`/images/posts/${post.slug}/${src}`} alt={alt} width={600} height={300} />;
+    },
+    paragraph: ({ node, children }) => {
+      if (node.children[0].type === 'image') {
+        const image = node.children[0];
+
+        return (
+          <div className={classes.image}>
+            <Image
+              src={`/images/posts/${post.slug}/${image.url}`}
+              alt={image.alt}
+              width={600}
+              height={300}
+            />
+          </div>
+        );
+      }
+
+      return <p>{children}</p>;
+    },
+
+    code: ({ language, value }) => {
+      return <SyntaxHighlighter style={atomDark} language={language} children={value} />;
+    },
+  };
 
   return (
     <article className={classes.content}>
-      <PostHeader title={DUMMY_POST.title} image={imagePath} />
+      <PostHeader title={post.title} image={imagePath} />
 
-      <ReactMarkdown>{DUMMY_POST.content}</ReactMarkdown>
+      <ReactMarkdown renderers={customRenderers}>{post.content}</ReactMarkdown>
     </article>
   );
 };

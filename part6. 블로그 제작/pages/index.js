@@ -1,51 +1,33 @@
 import { Fragment } from 'react';
+import { getFeaturedPosts } from '../lib/posts-util';
+
+import Head from 'next/head';
 
 import Hero from '../components/home-page/Hero';
 import FeaturedPosts from '../components/home-page/FeaturedPosts';
 
-const DUMMY_POSTS = [
-  {
-    slug: 'getting-started-with-nextjs',
-    title: 'Getting Started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt:
-      'NextJS is a the React framework for production - it makes building fullstack React apps and sites a breeze and ships',
-    date: '2022-11-07',
-  },
-  {
-    slug: 'getting-started-with-nextjs2',
-    title: 'Getting Started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt:
-      'NextJS is a the React framework for production - it makes building fullstack React apps and sites a breeze and ships',
-    date: '2022-11-07',
-  },
-  {
-    slug: 'getting-started-with-nextjs3',
-    title: 'Getting Started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt:
-      'NextJS is a the React framework for production - it makes building fullstack React apps and sites a breeze and ships',
-    date: '2022-11-07',
-  },
-  {
-    slug: 'getting-started-with-nextjs4',
-    title: 'Getting Started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt:
-      'NextJS is a the React framework for production - it makes building fullstack React apps and sites a breeze and ships',
-    date: '2022-11-07',
-  },
-];
-
-const HomePage = () => {
+const HomePage = ({ posts }) => {
   return (
     <Fragment>
+      <Head>
+        <title>Sung's Blog</title>
+        <meta name="description" content="프로그래밍과 웹 개발에 대한 포스팅" />
+      </Head>
       <Hero />
 
-      <FeaturedPosts posts={DUMMY_POSTS} />
+      <FeaturedPosts posts={posts} />
     </Fragment>
   );
+};
+
+export const getStaticProps = () => {
+  const featuredPosts = getFeaturedPosts();
+
+  return {
+    props: {
+      posts: featuredPosts,
+    },
+  };
 };
 
 export default HomePage;

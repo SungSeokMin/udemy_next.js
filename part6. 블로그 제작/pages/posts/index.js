@@ -1,42 +1,27 @@
+import { Fragment } from 'react';
+import { getAllPosts } from '../../lib/posts-util';
+
+import Head from 'next/head';
 import AllPosts from '../../components/posts/AllPosts';
 
-const DUMMY_POSTS = [
-  {
-    slug: 'getting-started-with-nextjs',
-    title: 'Getting Started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt:
-      'NextJS is a the React framework for production - it makes building fullstack React apps and sites a breeze and ships',
-    date: '2022-11-07',
-  },
-  {
-    slug: 'getting-started-with-nextjs2',
-    title: 'Getting Started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt:
-      'NextJS is a the React framework for production - it makes building fullstack React apps and sites a breeze and ships',
-    date: '2022-11-07',
-  },
-  {
-    slug: 'getting-started-with-nextjs3',
-    title: 'Getting Started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt:
-      'NextJS is a the React framework for production - it makes building fullstack React apps and sites a breeze and ships',
-    date: '2022-11-07',
-  },
-  {
-    slug: 'getting-started-with-nextjs4',
-    title: 'Getting Started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt:
-      'NextJS is a the React framework for production - it makes building fullstack React apps and sites a breeze and ships',
-    date: '2022-11-07',
-  },
-];
+const AllPostsPage = ({ posts }) => {
+  return (
+    <Fragment>
+      <Head>
+        <title>All My Posts</title>
+        <meta name="description" content="전체 게시글" />
+      </Head>
+      <AllPosts posts={posts} />;
+    </Fragment>
+  );
+};
 
-const AllPostsPage = () => {
-  return <AllPosts posts={DUMMY_POSTS} />;
+export const getStaticProps = () => {
+  const posts = getAllPosts();
+
+  return {
+    props: { posts },
+  };
 };
 
 export default AllPostsPage;
